@@ -1,10 +1,10 @@
 import type { CharacterRole, EventType, ModelSlot } from '@/types';
 
-export const MODELS: { value: ModelSlot; label: string; apiId: string }[] = [
+export const MODELS = [
   { value: 'opus-4-6',   label: 'Claude Opus 4.6',   apiId: 'claude-opus-4-6' },
   { value: 'sonnet-4-6', label: 'Claude Sonnet 4.6', apiId: 'claude-sonnet-4-6' },
   { value: 'haiku-4-5',  label: 'Claude Haiku 4.5',  apiId: 'claude-haiku-4-5-20251001' },
-];
+] as const;
 
 export const DEFAULT_MODEL: ModelSlot = 'sonnet-4-6';
 
