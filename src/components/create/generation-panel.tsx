@@ -47,6 +47,7 @@ export default function GenerationPanel() {
 
   const apiKey = useSettingsStore((s) => s.settings.apiKey);
   const promptTemplate = useSettingsStore((s) => s.settings.promptTemplate);
+  const model = useSettingsStore((s) => s.settings.model);
 
   // Validation
   const missingFields: string[] = [];
@@ -91,6 +92,7 @@ export default function GenerationPanel() {
           },
           apiKey,
           promptTemplate,
+          model,
         }),
         signal: controller.signal,
       });
@@ -124,7 +126,7 @@ export default function GenerationPanel() {
     }
   }, [
     canGenerate, title, tone, genre, subject, targetAudience,
-    characters, keyEvents, additionalNotes, apiKey, promptTemplate,
+    characters, keyEvents, additionalNotes, apiKey, promptTemplate, model,
     setGenerating, setGeneratedContent, setGenerationError,
   ]);
 
