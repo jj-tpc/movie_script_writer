@@ -1,0 +1,315 @@
+@import "tailwindcss";
+
+/* Enable class-based dark mode (apply `.dark` on html) */
+@variant dark (&:where(.dark, .dark *));
+
+/* ===================================================================
+   Design System — Synopsis Workshop (시놉시스 공방)
+   Tailwind CSS v4 · OKLCH color tokens · 4pt grid spacing
+   =================================================================== */
+
+@theme inline {
+  /* ----------------------------------------------------------
+     Typography
+     ---------------------------------------------------------- */
+  --font-display: var(--font-bricolage-grotesque);
+  --font-body: var(--font-gowun-batang);
+
+  /* Modular type scale — ratio ~1.25 (major third) */
+  --text-xs: 0.64rem;
+  --text-sm: 0.8rem;
+  --text-base: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.563rem;
+  --text-2xl: 1.953rem;
+  --text-3xl: 2.441rem;
+  --text-4xl: 3.052rem;
+  --text-5xl: 3.815rem;
+
+  /* ----------------------------------------------------------
+     Spacing — 4pt grid
+     ---------------------------------------------------------- */
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-6: 24px;
+  --spacing-8: 32px;
+  --spacing-12: 48px;
+  --spacing-16: 64px;
+  --spacing-24: 96px;
+
+  /* ----------------------------------------------------------
+     Border radius
+     ---------------------------------------------------------- */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+  --radius-full: 9999px;
+
+  /* ----------------------------------------------------------
+     Easing curves — cinematic motion
+     ---------------------------------------------------------- */
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+
+  /* ----------------------------------------------------------
+     Transition durations
+     ---------------------------------------------------------- */
+  --duration-fast: 120ms;
+  --duration-normal: 200ms;
+  --duration-slow: 350ms;
+  --duration-slower: 500ms;
+
+  /* ----------------------------------------------------------
+     Colors — Light theme (default)
+     Tinted neutrals toward amber hue (~70 in OKLCH)
+     ---------------------------------------------------------- */
+
+  /* Brand / Accent — warm terracotta */
+  --color-brand: oklch(0.65 0.14 45);
+  --color-brand-hover: oklch(0.58 0.14 45);
+  --color-brand-light: oklch(0.82 0.06 45);
+  --color-brand-subtle: oklch(0.93 0.025 50);
+
+  /* Backgrounds */
+  --color-bg: var(--bg-base);
+  --color-bg-raised: var(--bg-raised);
+  --color-bg-overlay: var(--bg-overlay);
+  --color-bg-sunken: var(--bg-sunken);
+
+  /* Text */
+  --color-text: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+
+  /* Borders */
+  --color-border: var(--border-default);
+  --color-border-subtle: var(--border-subtle);
+
+  /* Functional */
+  --color-success: oklch(0.62 0.12 145);
+  --color-warning: oklch(0.75 0.14 70);
+  --color-error: oklch(0.58 0.16 25);
+  --color-info: oklch(0.62 0.08 240);
+}
+
+/* ===================================================================
+   Light theme tokens (default)
+   =================================================================== */
+:root {
+  /* Backgrounds — warm cream/ivory */
+  --bg-base: oklch(0.97 0.008 70);
+  --bg-raised: oklch(0.985 0.005 70);
+  --bg-overlay: oklch(0.99 0.003 70);
+  --bg-sunken: oklch(0.945 0.012 70);
+
+  /* Text — warm near-black (never pure #000) */
+  --text-primary: oklch(0.20 0.01 70);
+  --text-secondary: oklch(0.40 0.015 70);
+  --text-tertiary: oklch(0.55 0.012 70);
+
+  /* Borders — warm-tinted */
+  --border-default: oklch(0.82 0.015 70);
+  --border-subtle: oklch(0.90 0.008 70);
+
+  /* Surfaces for interactive elements */
+  --surface-hover: oklch(0.94 0.012 70);
+  --surface-active: oklch(0.91 0.015 70);
+
+  /* Shadow colors — warm-tinted */
+  --shadow-color: oklch(0.20 0.01 70 / 0.08);
+  --shadow-color-strong: oklch(0.20 0.01 70 / 0.16);
+
+  /* Brand ink on subtle — darker so it hits AA on brand-subtle bg */
+  --color-brand-on-subtle: oklch(0.48 0.14 45);
+
+  /* Error subtle — soft red-wash for destructive zones (error boxes, delete hover) */
+  --color-error-subtle: oklch(0.95 0.03 25);
+  --color-error-subtle-hover: oklch(0.91 0.04 25);
+
+  /* Semantic hue tints — paired (bg + ink) for role/type badges.
+     Light-theme: bg L~0.93, ink L~0.42–0.48 — yields >=4.5:1 on each bg. */
+  --tint-amber-bg: oklch(0.93 0.03 45);
+  --tint-amber-ink: oklch(0.48 0.12 45);
+  --tint-blue-bg: oklch(0.93 0.03 200);
+  --tint-blue-ink: oklch(0.42 0.08 200);
+  --tint-red-bg: oklch(0.93 0.03 25);
+  --tint-red-ink: oklch(0.48 0.12 25);
+  --tint-green-bg: oklch(0.93 0.03 145);
+  --tint-green-ink: oklch(0.42 0.10 145);
+  --tint-violet-bg: oklch(0.93 0.03 280);
+  --tint-violet-ink: oklch(0.48 0.10 280);
+
+  /* Paper — warm ivory sheet on light desk */
+  --paper-bg: oklch(0.986 0.022 82);
+  --paper-edge: oklch(0.90 0.02 70);
+  --paper-blend: multiply;
+  --paper-shadow:
+    0 1px 0 0 oklch(0.90 0.02 70),
+    0 4px 8px oklch(0.20 0.01 70 / 0.05),
+    0 18px 32px oklch(0.20 0.01 70 / 0.08),
+    0 48px 80px oklch(0.20 0.01 70 / 0.08);
+
+  color-scheme: light;
+}
+
+/* ===================================================================
+   Dark theme tokens
+   Theater darkness with screen glow
+   =================================================================== */
+.dark {
+  /* Backgrounds — deep warm darks */
+  --bg-base: oklch(0.15 0.01 70);
+  --bg-raised: oklch(0.19 0.012 70);
+  --bg-overlay: oklch(0.22 0.013 70);
+  --bg-sunken: oklch(0.12 0.008 70);
+
+  /* Text — warm near-white (never pure #fff) */
+  --text-primary: oklch(0.93 0.008 70);
+  --text-secondary: oklch(0.70 0.012 70);
+  --text-tertiary: oklch(0.52 0.01 70);
+
+  /* Borders — warm-tinted */
+  --border-default: oklch(0.30 0.012 70);
+  --border-subtle: oklch(0.24 0.008 70);
+
+  /* Surfaces for interactive elements */
+  --surface-hover: oklch(0.22 0.012 70);
+  --surface-active: oklch(0.26 0.015 70);
+
+  /* Shadow colors */
+  --shadow-color: oklch(0.05 0.01 70 / 0.3);
+  --shadow-color-strong: oklch(0.05 0.01 70 / 0.5);
+
+  /* Brand surfaces re-tuned for dark theme */
+  --color-brand-subtle: oklch(0.28 0.04 50);
+  --color-brand-on-subtle: oklch(0.80 0.12 45);
+
+  /* Error subtle — deep red-wash */
+  --color-error-subtle: oklch(0.26 0.04 25);
+  --color-error-subtle-hover: oklch(0.30 0.05 25);
+
+  /* Semantic hue tints — dark-theme pair (bg L~0.26, ink L~0.78). */
+  --tint-amber-bg: oklch(0.26 0.03 45);
+  --tint-amber-ink: oklch(0.80 0.10 45);
+  --tint-blue-bg: oklch(0.26 0.03 200);
+  --tint-blue-ink: oklch(0.80 0.08 200);
+  --tint-red-bg: oklch(0.26 0.03 25);
+  --tint-red-ink: oklch(0.80 0.10 25);
+  --tint-green-bg: oklch(0.26 0.03 145);
+  --tint-green-ink: oklch(0.80 0.09 145);
+  --tint-violet-bg: oklch(0.26 0.03 280);
+  --tint-violet-ink: oklch(0.80 0.09 280);
+
+  /* Paper — aged vellum under warm lamplight */
+  --paper-bg: oklch(0.23 0.022 78);
+  --paper-edge: oklch(0.32 0.02 75);
+  --paper-blend: screen;
+  --paper-shadow:
+    0 1px 0 0 oklch(0.34 0.02 75),
+    0 8px 24px oklch(0 0 0 / 0.45),
+    0 40px 80px oklch(0 0 0 / 0.35);
+
+  color-scheme: dark;
+}
+
+/* ===================================================================
+   Base styles
+   =================================================================== */
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-body), serif;
+  line-height: 1.6;
+  transition: background-color var(--duration-slow) var(--ease-out-quart),
+              color var(--duration-slow) var(--ease-out-quart);
+}
+
+/* Headings default to display font */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display), sans-serif;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+}
+
+/* Focus ring — warm brand color */
+:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+}
+
+/* Selection — warm tint */
+::selection {
+  background: oklch(0.65 0.14 45 / 0.25);
+  color: var(--text-primary);
+}
+
+/* Scrollbar styling for browsers that support it */
+@supports (scrollbar-color: auto) {
+  * {
+    scrollbar-color: var(--border-default) transparent;
+    scrollbar-width: thin;
+  }
+}
+
+/* ===================================================================
+   Utility layers
+   =================================================================== */
+@utility text-display {
+  font-family: var(--font-display), sans-serif;
+}
+
+@utility text-body {
+  font-family: var(--font-body), serif;
+}
+
+@utility ease-out-quart {
+  transition-timing-function: var(--ease-out-quart);
+}
+
+@utility ease-out-quint {
+  transition-timing-function: var(--ease-out-quint);
+}
+
+@utility ease-in-out-quart {
+  transition-timing-function: var(--ease-in-out-quart);
+}
+
+/* ===================================================================
+   Scene-in — entrance animation for cards materializing during AI stream.
+   Subtle fade + 8px rise with exponential ease. Respects reduced motion.
+   Defined as a plain class (not @utility) because Tailwind v4's @utility
+   block doesn't expand the `animation` shorthand reliably here.
+   =================================================================== */
+@keyframes scene-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.scene-in {
+  animation: scene-in var(--duration-slow) var(--ease-out-quart) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scene-in {
+    animation: none;
+  }
+}
