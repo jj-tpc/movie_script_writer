@@ -38,6 +38,8 @@ export interface Synopsis {
   isFavorite: boolean;
 }
 
+export type ModelSlot = 'opus-4-6' | 'sonnet-4-6' | 'haiku-4-5';
+
 export interface UserSettings {
   apiKey: string;
   defaultGenre: string;
@@ -46,4 +48,5 @@ export interface UserSettings {
   promptTemplate: string;
   characterPromptTemplate: string;
   eventPromptTemplate: string;
+  model: ModelSlot;
 }

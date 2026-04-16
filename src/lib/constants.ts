@@ -1,4 +1,12 @@
-import type { CharacterRole, EventType } from '@/types';
+import type { CharacterRole, EventType, ModelSlot } from '@/types';
+
+export const MODELS: { value: ModelSlot; label: string; apiId: string }[] = [
+  { value: 'opus-4-6',   label: 'Claude Opus 4.6',   apiId: 'claude-opus-4-6' },
+  { value: 'sonnet-4-6', label: 'Claude Sonnet 4.6', apiId: 'claude-sonnet-4-6' },
+  { value: 'haiku-4-5',  label: 'Claude Haiku 4.5',  apiId: 'claude-haiku-4-5-20251001' },
+];
+
+export const DEFAULT_MODEL: ModelSlot = 'sonnet-4-6';
 
 export const GENRES = [
   { value: 'action', label: '액션' },
