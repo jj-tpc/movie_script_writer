@@ -3,7 +3,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { useSettingsStore } from '@/stores/settings-store';
 import { useSynopsesStore } from '@/stores/synopses-store';
-import { GENRES, TONES } from '@/lib/constants';
+import { GENRES, TONES, MODELS } from '@/lib/constants';
+import type { ModelSlot } from '@/types';
 import ApiKeyInput from './api-key-input';
 import PromptEditor from './prompt-editor';
 
@@ -51,6 +52,35 @@ function GeneralTab() {
     <div className="flex flex-col gap-8">
       {/* API Key */}
       <ApiKeyInput />
+
+      {/* Model selector */}
+      <div>
+        <label
+          htmlFor="model-select"
+          className="text-display mb-1.5 block text-sm font-medium text-[var(--text-primary)]"
+        >
+          AI 모델
+        </label>
+        <p className="mb-3 text-xs text-[var(--text-tertiary)]">
+          시놉시스 생성에 사용할 Claude 모델
+        </p>
+        <select
+          id="model-select"
+          value={settings.model}
+          onChange={(e) => updateSettings({ model: e.target.value as ModelSlot })}
+          className="w-full max-w-xs rounded-lg border border-[var(--border-default)]
+                     bg-[var(--bg-base)] px-3 py-2.5 text-sm text-[var(--text-primary)]
+                     transition-colors duration-[var(--duration-fast)]
+                     focus:border-[var(--color-brand)] focus:outline-none focus:ring-1
+                     focus:ring-[var(--color-brand)]"
+        >
+          {MODELS.map((m) => (
+            <option key={m.value} value={m.value}>
+              {m.label}
+            </option>
+          ))}
+        </select>
+      </div>
 
       {/* Theme selector */}
       <div>
