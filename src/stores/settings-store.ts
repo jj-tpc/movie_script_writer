@@ -5,6 +5,7 @@ import {
   DEFAULT_CHARACTER_PROMPT_TEMPLATE,
   DEFAULT_EVENT_PROMPT_TEMPLATE,
   DEFAULT_MODEL,
+  MODELS,
 } from '@/lib/constants';
 import type { UserSettings } from '@/types';
 
@@ -70,10 +71,11 @@ export const useSettingsStore = create<SettingsState>()(
       skipHydration: true,
       merge: (persisted, current) => {
         const p = persisted as { settings?: Partial<UserSettings> } | undefined;
-        return {
-          ...current,
-          settings: { ...current.settings, ...(p?.settings ?? {}) },
-        };
+        const merged = { ...current.settings, ...(p?.settings ?? {}) };
+        if (!MODELS.some((m) => m.value === merged.model)) {
+          merged.model = DEFAULT_MODEL;
+        }
+        return { ...current, settings: merged };
       },
     }
   )
