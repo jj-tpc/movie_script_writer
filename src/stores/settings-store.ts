@@ -4,6 +4,7 @@ import {
   DEFAULT_PROMPT_TEMPLATE,
   DEFAULT_CHARACTER_PROMPT_TEMPLATE,
   DEFAULT_EVENT_PROMPT_TEMPLATE,
+  DEFAULT_MODEL,
 } from '@/lib/constants';
 import type { UserSettings } from '@/types';
 
@@ -24,6 +25,7 @@ const defaultSettings: UserSettings = {
   promptTemplate: DEFAULT_PROMPT_TEMPLATE,
   characterPromptTemplate: DEFAULT_CHARACTER_PROMPT_TEMPLATE,
   eventPromptTemplate: DEFAULT_EVENT_PROMPT_TEMPLATE,
+  model: DEFAULT_MODEL,
 };
 
 export const useSettingsStore = create<SettingsState>()(
@@ -66,6 +68,13 @@ export const useSettingsStore = create<SettingsState>()(
     {
       name: 'user-settings',
       skipHydration: true,
+      merge: (persisted, current) => {
+        const p = persisted as { settings?: Partial<UserSettings> } | undefined;
+        return {
+          ...current,
+          settings: { ...current.settings, ...(p?.settings ?? {}) },
+        };
+      },
     }
   )
 );
