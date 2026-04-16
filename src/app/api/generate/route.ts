@@ -1,16 +1,17 @@
 import { NextRequest } from 'next/server';
 import Anthropic from '@anthropic-ai/sdk';
 import { buildPrompt } from '@/lib/ai';
-import { DEFAULT_PROMPT_TEMPLATE } from '@/lib/constants';
+import { DEFAULT_PROMPT_TEMPLATE, MODELS, DEFAULT_MODEL } from '@/lib/constants';
 import type { SynopsisInput } from '@/types';
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { input, apiKey, promptTemplate } = body as {
+    const { input, apiKey, promptTemplate, model } = body as {
       input: SynopsisInput;
       apiKey?: string;
       promptTemplate?: string;
+      model?: string;
     };
 
     const resolvedKey = apiKey || process.env.ANTHROPIC_API_KEY;
@@ -29,8 +30,11 @@ export async function POST(request: NextRequest) {
     const template = promptTemplate || DEFAULT_PROMPT_TEMPLATE;
     const prompt = buildPrompt(input, template);
 
+    const fallbackApiId = MODELS.find((m) => m.value === DEFAULT_MODEL)!.apiId;
+    const resolvedApiId = MODELS.find((m) => m.value === model)?.apiId ?? fallbackApiId;
+
     const stream = client.messages.stream({
-      model: 'claude-sonnet-4-20250514',
+      model: resolvedApiId,
       max_tokens: 4096,
       messages: [{ role: 'user', content: prompt }],
     });
